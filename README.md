@@ -23,7 +23,7 @@ An AI-powered application that creates customized flashcards based on any upload
 https://ai-flash-card-generator-mauve.vercel.app/
 
 ## Features
-- User-friendly access with gmail login or email/password authentication.
+- User-friendly access with Gmail login or email/password authentication.
 - Generate flashcards by uploading text files.
 - Each flashcard contains AI-generated questions and answers for effective study.
 - Save, edit, and organize flashcards within custom folders.
@@ -90,7 +90,7 @@ Open the browser and go to `http://localhost:3000`. Ensure that everything is lo
 
 ## How to use the application
 
-1. Sign-in using your Google account.
+1. Sign in using your Google account.
 2. Upload a document to generate flashcards.
 3. Click on any flashcard to view the answer.
 4. Review flashcards through the dashboard, and reuse as needed.
@@ -98,7 +98,7 @@ Open the browser and go to `http://localhost:3000`. Ensure that everything is lo
 
 ## Contributing
 
-We love contributions! Here's how you can help make the AI-powered FinanceGuru even better:
+We love contributions! Here's how you can help make the FlashCardGPT even better:
 
 1. Fork the project (`gh repo fork https://github.com/0xmetaschool/FlashCardGPT.git`)
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
