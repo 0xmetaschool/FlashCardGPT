@@ -42,7 +42,7 @@ async function getOrCreateAssistant() {
       ]
       
       Do not include any introductory text, explanations, or other content. Only output valid JSON in the exact format shown above.`,
-      model: 'gpt-4-turbo-preview',
+      model: 'gpt-4o',
       tools: [{ type: 'file_search' }]
     });
   } catch (error) {
