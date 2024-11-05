@@ -35,13 +35,13 @@ https://ai-flash-card-generator-mauve.vercel.app/
 
 ## Getting Started
 
-**Prerequisites**
+### Prerequisites
 
 - Next.js
 - Clerk credentials
 - OpenAI API Key
 
-**How to run the project**
+### Installation
 
 1. Clone the repository:
     ```bash
