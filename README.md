@@ -128,7 +128,7 @@ This project is licensed under the MIT License - see the [LICENSE file](https://
 - OpenAI for powering the flashcard generation
 - Clerk for login and authentication
 
-## FAQ
+## FAQs
 
 **Q: Do I need an OpenAI API key to use FlashCardGPT?**
 A: Yes, an OpenAI API key is required to enable the AI-powered flashcard generation. You can obtain an API key by signing up on the OpenAI website.
