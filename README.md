@@ -12,7 +12,7 @@ An AI tool that helps you revise concepts through flash cards.
   - [How to run the project](#how-to-run-the-project)
 - [Screenshots](#screenshots)
 - [How to use the application](#how-to-use-the-application)
-- [Use Cases & Future Enhancements](#Use-Cases-&-Future-Enhancements)
+- [Use Cases & Future Enhancements](#use-cases-&-future-enhancements)
 - [Contributing](#contributing)
 - [License](#license)
 - [Acknowledgements](#acknowledgements)
