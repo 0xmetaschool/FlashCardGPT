@@ -21,7 +21,7 @@ An AI tool that helps you revise concepts through flash cards.
 
 ## Live Demo
 
-https://ai-flash-card-generator-mauve.vercel.app/
+[https://flash-card-gpt-metaschool.vercel.app/](https://flash-card-gpt-metaschool.vercel.app/)
 
 ## Features
 - User-friendly access with Gmail login or email/password authentication.
