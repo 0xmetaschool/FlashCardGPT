@@ -1,6 +1,6 @@
-## FlashCardGPT
+# FlashCardGPT
 
-An AI-powered application that creates customized flashcards based on any uploaded text file, making studying easier and more effective.
+An AI tool that helps you revise concepts through flash cards.
 
 ## Table of Contents
 
@@ -23,20 +23,17 @@ An AI-powered application that creates customized flashcards based on any upload
 https://ai-flash-card-generator-mauve.vercel.app/
 
 ## Features
-- User-friendly access with gmail login or email/password authentication.
+- User-friendly access with Gmail login or email/password authentication.
 - Generate flashcards by uploading text files.
 - Each flashcard contains AI-generated questions and answers for effective study.
 - Save, edit, and organize flashcards within custom folders.
 
 ## Technologies Used
-- Next.js
-- React
-- OpenAI API Key
-- Clerk authentication
-
+- Next.js and React for Frontend and Backend
+- OpenAI API Key for AI-Powered Features
+- Clerk authentication for Authorization
 
 ## Getting Started
-
 
 **Prerequisites**
 
@@ -79,9 +76,7 @@ https://ai-flash-card-generator-mauve.vercel.app/
     npm run dev
     ```
 
-6. Run the development server:
-
-Open the browser and go to `http://localhost:3000`. Ensure that everything is loading and the live preview works as expected.
+6. Open your browser and navigate to `http://localhost:3000`
 
 ## Screenshots
 
@@ -90,10 +85,10 @@ Open the browser and go to `http://localhost:3000`. Ensure that everything is lo
 
 ## How to use the application
 
-1. Sign-in using your Google account.
+1. Sign in using your Google account.
 2. Upload a document to generate flashcards.
 3. Click on any flashcard to view the answer.
-4. Review flashcards through the dashboard, and reuse as needed.
+4. Review flashcards through the dashboard, and reuse them as needed.
 
 
 ## Contributing
@@ -107,14 +102,10 @@ We love contributions! Here's how you can help make the AI-powered FinanceGuru e
 5. Open a Pull Request
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE file](./LICENSE) for details.
+This project is licensed under the MIT License - see the [LICENSE file](https://github.com/0xmetaschool/FlashCardGPT/blob/main/LICENSE) for details.
 
 
 ## Acknowledgments
 
 - OpenAI for powering the flashcard generation
 - Clerk for login and authentication
-
-## Contact
-
-Please open an issue in the GitHub repository for any queries or support.
