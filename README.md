@@ -25,9 +25,9 @@ https://ai-flash-card-generator-mauve.vercel.app/
 
 ## Features
 - User-friendly access with Gmail login or email/password authentication.
-- Generate flashcards by uploading text files.
+- Generate flashcards by uploading files.
 - Each flashcard contains AI-generated questions and answers for effective study.
-- Save, edit, and organize flashcards within custom folders.
+
 
 ## Technologies Used
 - Next.js and React for Frontend and Backend
