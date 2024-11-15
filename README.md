@@ -81,7 +81,13 @@ An AI tool that helps you revise concepts through flash cards.
 
 ## Screenshots
 
-<div style="display: flex; justify-content: space-between;"> <img src="public/ssc1.png" alt="Screenshot 1" style="width: 49%; border: 2px solid black;" /> <img src="public/ssc2.png" alt="Screenshot 2" style="width: 49%; border: 2px solid black;" /> </div> <div style="margin-top: 10px;"> <img src="public/ssc3.png" alt="Screenshot 3" style="width: 100%; border: 2px solid black;" /> </div>
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://github.com/0xmetaschool/FlashCardGPT/blob/main/public/flashcard-gpt-template-landing-page.png?raw=true" alt="FlashCard GPT Template Landing Page screenshot" style="width: 49%; border: 2px solid black;" />
+  <img src="https://github.com/0xmetaschool/FlashCardGPT/blob/main/public/flashcard-gpt-template-upload-page.png?raw=true" alt="FlashCard GPT Template Upload Page screenshot" style="width: 49%; border: 2px solid black;" />
+</div>
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://github.com/0xmetaschool/FlashCardGPT/blob/main/public/flashcard-gpt-template-flashcard-page.png?raw=true" alt="FlashCard GPT Template Flashcard Page screenshot" style="width: 49%; border: 2px solid black;" />
+</div>
 
 
 ## How to use the application
