@@ -26,7 +26,7 @@ const Footer = () => {
         <div className="flex justify-between items-start">
           {/* Left side */}
           <div>
-            <div className="text-gray-500 text-xs mb-4 pt-1 pb-1 pl-3 pr-3 bg-slate-100 max-w-[190px]">
+            <div className="text-gray-500 text-xs mb-4 pt-1 pb-1 pl-3 pr-3 bg-slate-100 max-w-[195px]">
               Free Open source AI template
             </div>
             <div className="text-black mb-4 text-2xl font-bold font-sans">

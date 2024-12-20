@@ -1,19 +1,70 @@
 'use client';
 import React, { useState } from 'react';
-import { Upload, FileText, Loader } from 'lucide-react';
+import { Upload, FileText, Loader, CheckCircle2 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import FlashcardAnimation from "@/components/ui/FlashcardAnimation";
+import { Skeleton } from "@/components/ui/skeleton";
 
-const FlashCard = ({ question, answer, index }) => {
+// Updated Processing Steps Component
+const ProcessingSteps = ({ currentStep }) => {
+  const steps = [
+    { id: 1, title: 'Uploading Document', description: 'Processing your file...' },
+    { id: 2, title: 'Analyzing Content', description: 'Extracting key information...' },
+    { id: 3, title: 'Generating Flashcards', description: 'Creating study materials...' },
+    { id: 4, title: 'Finalizing', description: 'Preparing your flashcards...' }
+  ];
+
+  if (currentStep === 0) return null;
+
+  return (
+    <div className="fixed bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 max-w-sm border border-gray-200 animate-slide-up z-50">
+      <div className="space-y-3">
+        {steps.map((step) => (
+          <div 
+            key={step.id} 
+            className={`flex items-center gap-3 transition-all duration-300 
+              ${currentStep >= step.id ? 'opacity-100' : 'opacity-40'}
+              ${currentStep === step.id ? 'scale-105' : 'scale-100'}
+              ${currentStep < step.id ? 'translate-y-0' : '-translate-y-0'}`}
+          >
+            <div className="flex-shrink-0">
+              {currentStep > step.id ? (
+                <CheckCircle2 className="h-5 w-5 text-green-500 transition-all duration-300" />
+              ) : currentStep === step.id ? (
+                <Loader className="h-5 w-5 text-blue-500 animate-spin transition-all duration-300" />
+              ) : (
+                <div className="h-5 w-5 rounded-full border-2 border-gray-300 transition-all duration-300" />
+              )}
+            </div>
+            <div className="flex flex-col min-w-0">
+              <span className="font-medium text-sm truncate">{step.title}</span>
+              <span className="text-xs text-gray-500 truncate">{step.description}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const FlashCard = ({ question, answer, index, isLoading }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const handleClick = () => {
-    setIsFlipped(!isFlipped);
+    if (!isLoading) {
+      setIsFlipped(!isFlipped);
+    }
   };
 
-  // Flash card section
+  if (isLoading) {
+    return (
+      <div className="relative h-48 w-full">
+        <Skeleton className="w-full h-full rounded-lg" />
+      </div>
+    );
+  }
+
   return (
     <div 
       className="relative h-48 w-full perspective-1000"
@@ -54,6 +105,8 @@ export default function Dashboard() {
   const [error, setError] = useState('');
   const [flashcards, setFlashcards] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [loadingCards, setLoadingCards] = useState([]);
+  const [processingStep, setProcessingStep] = useState(0);
 
   const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
 
@@ -66,7 +119,6 @@ export default function Dashboard() {
       'application/msword'
     ];
 
-    // Checking uploaded file type and size
     if (!selectedFile) {
       setError('No file selected');
       setFile(null);
@@ -97,8 +149,20 @@ export default function Dashboard() {
 
     setLoading(true);
     setError('');
+    setIsSubmitting(true);
+    setLoadingCards(Array(4).fill({ isLoading: true }));
 
     try {
+      // Step 1: Uploading
+      setProcessingStep(1);
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      // Step 2: Analyzing
+      setProcessingStep(2);
+      await new Promise(resolve => setTimeout(resolve, 1500));
+
+      // Step 3: Generating
+      setProcessingStep(3);
       const formData = new FormData();
       formData.append('file', file);
 
@@ -113,49 +177,62 @@ export default function Dashboard() {
         throw new Error(data.error || 'Failed to generate flashcards');
       }
 
-      // Check if no flashcards were generated
       if (!data.flashcards || data.flashcards.length === 0) {
         setError('No flashcards could be generated from the document. Please try a different document.');
-        setLoading(false);
+        setLoadingCards([]);
+        setIsSubmitting(false);
         return;
       }
 
-      // Check if the file is empty
       if (file.size === 0) {
         setError('The uploaded document is empty. Please upload a document with content.');
-        setLoading(false);
+        setLoadingCards([]);
+        setIsSubmitting(false);
         return;
       }
 
-      setFlashcards(data.flashcards);
-      setIsSubmitting(true);
+      // Step 4: Finalizing
+      setProcessingStep(4);
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      // Simulate gradual loading of flashcards
+      const cards = data.flashcards;
+      setFlashcards([]);
+      for (let i = 0; i < cards.length; i++) {
+        await new Promise(resolve => setTimeout(resolve, 500));
+        setFlashcards(prev => [...prev, cards[i]]);
+        setLoadingCards(prev => prev.slice(1));
+      }
 
       if (data.totalChunks > data.processedChunks) {
         setError(`Note: Only processed ${data.processedChunks} of ${data.totalChunks} sections due to size limitations. Consider uploading a smaller document for better results.`);
       }
     } catch (err) {
       let errorMessage = 'Failed to generate flashcards. Please try again.';
-
       if (err.message.includes('Rate limit exceeded')) {
         errorMessage = 'Please wait a few minutes before trying again, or try with a smaller document.';
       } else if (err.message.includes('too large')) {
         errorMessage = 'Document is too large. Please try with a smaller document (less than 10 pages recommended).';
       }
-
       setError(errorMessage);
+      setLoadingCards([]);
+      setIsSubmitting(false);
     } finally {
       setLoading(false);
+      // Reset processing step after a delay
+      setTimeout(() => setProcessingStep(0), 1000);
     }
   };
 
   const resetAll = () => {
     setFile(null);
     setFlashcards([]);
+    setLoadingCards([]);
     setError('');
     setIsSubmitting(false);
+    setProcessingStep(0);
   };
-   
-  // Upload file section
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 to-white py-12 px-4">
       <div className="container mx-auto max-w-4xl">
@@ -232,26 +309,23 @@ export default function Dashboard() {
               </CardHeader>
             </Card>
             
-            {flashcards.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {flashcards.map((card, index) => (
-                  <FlashCard
-                    key={index}
-                    question={card.question}
-                    answer={card.answer}
-                    index={index} 
-                  />
-                ))}
-              </div>
-            ) : (
-              <Card>
-                <CardContent className="py-4">
-                  <div className="text-center text-gray-500">
-                    No flashcards generated
-                  </div>
-                </CardContent>
-              </Card>
-            )}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {flashcards.map((card, index) => (
+                <FlashCard
+                  key={`card-${index}`}
+                  question={card.question}
+                  answer={card.answer}
+                  index={index}
+                  isLoading={false}
+                />
+              ))}
+              {loadingCards.map((_, index) => (
+                <FlashCard
+                  key={`loading-${index}`}
+                  isLoading={true}
+                />
+              ))}
+            </div>
 
             <div className="flex justify-center mt-4 mb-4">    
               <Button 
@@ -270,6 +344,8 @@ export default function Dashboard() {
             <AlertDescription>{error}</AlertDescription>
           </Alert>
         )}
+
+        <ProcessingSteps currentStep={processingStep} />
       </div>
     </div>
   );
